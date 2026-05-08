@@ -1,6 +1,95 @@
 <img width="790" height="490" alt="image" src="https://github.com/user-attachments/assets/b4ed077c-35c5-403f-9427-7b38a6cb4642" />
 <img width="638" height="636" alt="image" src="https://github.com/user-attachments/assets/ba142f9a-20b1-41d5-8007-570a6aba965c" />
+# Gray-Scott Reaction-Diffusion Simulation
 
+A numerical simulation of the Gray-Scott model implemented in Python/NumPy.
+
+## Parameters
+
+|Parameter|Value|Description                    |
+|---------|-----|-------------------------------|
+|N        |100  |Grid size (100x100)            |
+|Du       |0.16 |Diffusion rate of U (substrate)|
+|Dv       |0.08 |Diffusion rate of V (product)  |
+|f        |0.012|Feed rate (base)               |
+|k        |0.050|Kill rate                      |
+|dt       |1.0  |Timestep                       |
+|Steps    |4000 |Total iterations               |
+
+## Equations
+
+```
+dU/dt = Du * nabla^2 U  -  U*V^2  +  f*(1 - U)
+dV/dt = Dv * nabla^2 V  +  U*V^2  -  (f + k)*V
+```
+
+Laplacian computed via periodic boundary conditions using np.roll.
+
+## Baseline Results (clean run, eta=0)
+
+|Metric                       |Value                           |
+|-----------------------------|--------------------------------|
+|U mean range                 |0.661 - 0.971                   |
+|V mean range                 |0.014 - 0.068                   |
+|Coverage range (V > 0.1)     |5.8% - 26.7%                    |
+|Peak reaction rate (UV2)     |0.004267 at step 1800           |
+|Peak coverage                |26.7% at step 2800              |
+|Late-stage mean coverage     |22.4% (steps 2000-4000)         |
+|Late-stage coverage std      |0.0224                          |
+|Late-stage oscillation period|~300-500 steps (steps 2800-4000)|
+
+## Observed Dynamics (baseline)
+
+Three distinct phases:
+
+1. **Nucleation (steps 0-800):** V grows from the seeded region,
+   U is locally consumed. Early peaks at steps 200, 500, 800
+   with coverage rising from 5.8% to 21.3%.
+1. **Expansion and peak (steps 800-1800):** Bubbles spread across
+   the grid. Reaction rate UV2 and coverage both peak at step 1800
+   (UV2 = 0.004267, coverage = 26.6%). The 1000-step gap between
+   steps 800 and 1800 reflects the nucleation-to-expansion
+   transition, not a regular oscillation.
+1. **Transition and late attractor (steps 1800-4000):** Period
+   settles into a stable oscillation. Coverage oscillates around
+   22.4% and neither collapses to zero nor fills the grid.
+
+## Noise Resilience Test
+
+Feed rate f was perturbed at each step by a uniform random term eta:
+
+```
+f_step = f_base + uniform(-eta, +eta)
+```
+
+Four noise levels were tested. All runs used identical initial
+conditions (same random seed).
+
+|eta  |late_mean|late_std|period_mean|period_std|peaks|
+|-----|---------|--------|-----------|----------|-----|
+|0.000|0.2182   |0.0307  |500.0      |226.8     |8    |
+|0.001|0.2192   |0.0344  |485.7      |135.5     |8    |
+|0.003|0.2221   |0.0322  |387.5      |92.7      |9    |
+|0.006|0.2176   |0.0289  |380.0      |74.8      |11   |
+
+**Findings:**
+
+- Late-stage coverage mean is stable across all noise levels
+  (0.217-0.222), confirming the attractor is robust to feed-rate
+  perturbation at these scales.
+- Oscillation period compresses modestly as noise increases
+  (500 -> 380 steps), with period variance decreasing. Higher
+  noise causes more small fluctuations that the peak finder
+  detects, increasing peak count.
+- No collapse or unbounded growth was observed at any tested
+  noise level.
+
+## Files
+
+- `gray_scott.py` – simulation and analysis script
+- `gray_scott_noise.py` – noise resilience test script
+- `gray_scott_bubbles.csv` – logged metrics, clean run
+- `gray_scott_bubbles.png` – field plots, clean run
 # Gray-Scott Reaction-Diffusion Simulation — Results
 
 ## Parameters
