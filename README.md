@@ -1,5 +1,5 @@
 ![Gray-Scott plot](gray_scott_bubbles.png)<img width="638" height="636" alt="image" src="https://github.com/user-attachments/assets/fe1c383b-0cc8-4c80-a829-1c855f0091b1" />
-the documentation notes that the stability of these "eggs" was verified at the 926-step mark. This is the point where the cycle binding ensures that the pattern doesn't just flicker into existence, but stabilizes into a persistent form—the "tadpole" that can eventually navigate the "viscous space" of the higher architecture.
+This documentation notes that the stability of these "eggs" was verified at the 926-step mark. This is the point where the cycle binding ensures that the pattern doesn't just flicker into existence, but stabilizes into a persistent form—the "tadpole" that can eventually navigate the "viscous space" of the higher architecture.
 # Gray-Scott Reaction-Diffusion Simulation
 
 A numerical simulation of the Gray-Scott model implemented in Python/NumPy.
