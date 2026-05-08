@@ -1,3 +1,4 @@
+![Gray-Scott plot](gray_scott_bubbles.png)
 # Gray-Scott Reaction-Diffusion Simulation
 
 A numerical simulation of the Gray-Scott model implemented in Python/NumPy.
