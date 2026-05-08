@@ -1,4 +1,5 @@
-![Gray-Scott plot](gray_scott_bubbles.png)
+![Gray-Scott plot](gray_scott_bubbles.png)<img width="638" height="636" alt="image" src="https://github.com/user-attachments/assets/fe1c383b-0cc8-4c80-a829-1c855f0091b1" />
+
 # Gray-Scott Reaction-Diffusion Simulation
 
 A numerical simulation of the Gray-Scott model implemented in Python/NumPy.
