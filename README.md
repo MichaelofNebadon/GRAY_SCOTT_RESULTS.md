@@ -1,4 +1,73 @@
-# GRAY_SCOTT_RESULTS.md
+# Gray-Scott Reaction-Diffusion Simulation
+
+A numerical simulation of the Gray-Scott model implemented in Python/NumPy.
+
+## Parameters
+
+|Parameter|Value|Description                    |
+|---------|-----|-------------------------------|
+|N        |100  |Grid size (100×100)            |
+|Du       |0.16 |Diffusion rate of U (substrate)|
+|Dv       |0.08 |Diffusion rate of V (product)  |
+|f        |0.012|Feed rate                      |
+|k        |0.050|Kill rate                      |
+|dt       |1.0  |Timestep                       |
+|Steps    |4000 |Total iterations               |
+
+## Equations
+
+```
+dU/dt = Du * nabla^2 U  -  U*V^2  +  f*(1 - U)
+dV/dt = Dv * nabla^2 V  +  U*V^2  -  (f + k)*V
+```
+
+Laplacian computed via periodic boundary conditions using np.roll.
+
+## Results
+
+|Metric                       |Value                       |
+|-----------------------------|----------------------------|
+|U mean range                 |0.661 - 0.971               |
+|V mean range                 |0.014 - 0.068               |
+|Coverage range (V > 0.1)     |5.8% - 26.7%                |
+|Peak reaction rate (UV2)     |0.004267 at step 1800       |
+|Peak coverage                |26.7% at step 2800          |
+|Late-stage mean coverage     |22.4% (steps 2000-4000)     |
+|Late-stage coverage std      |0.0224                      |
+|Late-stage oscillation period|~300 steps (steps 2800-4000)|
+
+## Observed Dynamics
+
+Three distinct phases:
+
+1. **Nucleation (steps 0-800):** V grows from the seeded region,
+   U is locally consumed. Early peaks at steps 200, 500, 800
+   with coverage rising from 5.8% to 21.3%.
+1. **Expansion and peak (steps 800-1800):** Bubbles spread across
+   the grid. Reaction rate UV2 and coverage both peak at step 1800
+   (UV2 = 0.004267, coverage = 26.6%). The 1000-step gap between
+   steps 800 and 1800 reflects the nucleation-to-expansion
+   transition, not a regular oscillation.
+1. **Transition and late attractor (steps 1800-4000):** Period
+   settles from ~500 steps (steps 1800-2800) to a stable ~300 steps
+   (steps 2800-4000). Coverage oscillates around 22.4% and neither
+   collapses to zero nor fills the grid.
+
+## Peak Analysis
+
+Coverage peaks detected at steps: 200, 500, 800, 1800, 2300, 2800, 3100, 3400, 3700
+
+|Phase         |Steps    |Period                   |
+|--------------|---------|-------------------------|
+|Nucleation    |200-800  |300 steps                |
+|Expansion gap |800-1800 |1000 steps (non-periodic)|
+|Transition    |1800-2800|~500 steps               |
+|Late attractor|2800-4000|~300 steps               |
+
+## Files
+
+- `gray_scott.py` — simulation and analysis script
+- `gray_scott_bubbles.csv` — logged metrics (one row per 100 steps)# GRAY_SCOTT_RESULTS.md
 Gray-Scott Reaction-Diffusion Simulation — Results
 # Gray-Scott Reaction-Diffusion Simulation — Results
 
