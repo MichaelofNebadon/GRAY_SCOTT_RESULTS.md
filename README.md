@@ -1,4 +1,7 @@
 <img width="790" height="490" alt="image" src="https://github.com/user-attachments/assets/b4ed077c-35c5-403f-9427-7b38a6cb4642" />
+<img width="638" height="636" alt="image" src="https://github.com/user-attachments/assets/ba142f9a-20b1-41d5-8007-570a6aba965c" />
+
+
 # Gray-Scott Reaction-Diffusion Simulation — Results
 
 ## Parameters
