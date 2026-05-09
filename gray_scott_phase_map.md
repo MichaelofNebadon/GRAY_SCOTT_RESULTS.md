@@ -1,4 +1,8 @@
 # Gray-Scott Reaction-Diffusion Simulation
+<img width="579" height="589" alt="image" src="https://github.com/user-attachments/assets/a7e66dd1-db15-460e-8da9-105a0d9647b2" />
+
+<img width="990" height="490" alt="image" src="https://github.com/user-attachments/assets/c7269123-d4c1-4108-a34d-c8f3299fd497" />
+
 # Gray-Scott 2D Phase Map
 
 Parameter sweep across feed rate (f) and kill rate (k).
