@@ -1,4 +1,6 @@
 # Gray-Scott Reaction-Diffusion Simulation — Results
+This documentation establishes the baseline metrics and identifies 
+the sharp thresholds required for pattern formation.
 
 ## Parameters
 
