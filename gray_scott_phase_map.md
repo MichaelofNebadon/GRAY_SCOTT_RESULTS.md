@@ -1,3 +1,5 @@
+stability_results.json
+
 # Gray-Scott Reaction-Diffusion Simulation
 <img width="1456" height="495" alt="image" src="https://github.com/user-attachments/assets/17acf72d-f485-490f-9eed-af6e5f1885c6" />
 
