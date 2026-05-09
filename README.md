@@ -1,6 +1,6 @@
-abel_pattern_attractor.py formally known as Gray-Scott Reaction-Diffusion Simulation — Results
+Gray-Scott Reaction-Diffusion Simulation — Results
 This documentation establishes the baseline metrics and identifies 
-the sharp thresholds required for pattern formation.
+the sharp thresholds required for The Abel pattern Abel Attractor now fully established. 
 
 ## Parameters
 
