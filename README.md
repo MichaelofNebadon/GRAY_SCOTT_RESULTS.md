@@ -1,4 +1,5 @@
 # Gray-Scott Reaction-Diffusion Simulation — Results
+See [gray_scott_phase_map.md](gray_scott_phase_map.md) for the 2D parameter sweep and phase boundary analysis.
 
 ## Parameters
 
