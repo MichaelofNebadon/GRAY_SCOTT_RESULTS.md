@@ -1,4 +1,7 @@
 # Gray-Scott Reaction-Diffusion Simulation
+<img width="1456" height="495" alt="image" src="https://github.com/user-attachments/assets/17acf72d-f485-490f-9eed-af6e5f1885c6" />
+
+
 <img width="579" height="589" alt="image" src="https://github.com/user-attachments/assets/a7e66dd1-db15-460e-8da9-105a0d9647b2" />
 
 <img width="990" height="490" alt="image" src="https://github.com/user-attachments/assets/c7269123-d4c1-4108-a34d-c8f3299fd497" />
