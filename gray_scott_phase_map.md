@@ -9,6 +9,120 @@ stability_results.json
 <img width="990" height="490" alt="image" src="https://github.com/user-attachments/assets/c7269123-d4c1-4108-a34d-c8f3299fd497" />
 
 # Gray-Scott 2D Phase Map
+k=0.040 k=0.044 k=0.048 k=0.050 k=0.052 k=0.056 k=0.060
+f=0.006  COLL    COLL    COLL    COLL    COLL    COLL    COLL
+f=0.008  COLL    COLL    COLL    COLL    COLL    COLL    COLL
+f=0.010  COLL    COLL    OSCI    STBL    COLL    COLL    COLL
+f=0.012  COLL    COLL    OSCI    STBL    STBL    COLL    COLL
+f=0.014  OSCI    COLL    COLL    OSCI    OSCI    COLL    COLL
+f=0.016  UNIF    OSCI    COLL    OSCI    STBL    STBL    COLL
+f=0.018  UNIF    OSCI    OSCI    OSCI    OSCI    UNIF    COLL
+
+**Legend:** COLL = collapsed (zero coverage), UNIF = uniform (full coverage), STBL = stable (pattern persists, low variance), OSCI = oscillating (pattern cycles).
+
+## Distribution (49 runs)
+
+| Regime | Count | Fraction |
+|--------|-------|----------|
+| COLL   | 30    | 61.2%    |
+| OSCI   | 11    | 22.4%    |
+| STBL   | 5     | 10.2%    |
+| UNIF   | 3     | 6.1%     |
+
+## Key Findings
+
+### Minimum feed rate for pattern formation
+**f ≥ 0.010** – below this threshold, all k collapse.
+
+### Diagonal band
+Pattern‑forming region tilts from (f=0.010, k=0.048) toward (f=0.018, k=0.052). Higher f tolerates higher k – f and k are coupled.
+
+### Uniform saturation (UNIF)
+At f=0.016‑0.018, k=0.040, feed rate overwhelms kill rate → V saturates grid (~100% coverage). Morphologically distinct from bubble pattern.
+
+### Anomalous cell – f=0.014, k=0.040 (OSCI, ~86% coverage)
+Low kill rate allows V to spread without adequate decay, producing a near‑filled or labyrinthine pattern rather than discrete bubbles.
+
+### Gap at f=0.014, k=0.048 (COLL)
+Pattern boundary is irregular – collapses while neighbours at higher/lower k sustain patterns.
+
+### k=0.060 collapses at all tested f.
+
+## Inverted‑bubble morphology (f=0.014, k=0.040)
+
+**Observed pattern:** V fills most of the grid with scattered dark holes (low‑V regions) in a high‑V background – inverse of the bubble regime (discrete V‑rich spots in a V‑depleted substrate).
+
+**Mechanism:**
+- k=0.040 too low for adequate V decay
+- f=0.014 high enough to sustain reaction but below saturation threshold (UNIF appears at k=0.040 only for f ≥ 0.016)
+- Result: V spreads across grid forming interconnected maze‑like structures
+
+**Coverage behaviour (4000 steps):** Rises rapidly to 80‑95%, oscillates with high amplitude, does not settle to a stable mean.
+
+### Stability test (10,000 steps)
+
+| Metric | Value |
+|--------|-------|
+| Late mean coverage | 0.8265 |
+| Late std coverage | 0.1120 |
+| Final coverage | 0.9297 |
+| Coverage range | 0.0625 – 0.9993 |
+
+**Conclusion:** Coverage oscillates across nearly the full range (6% to 100%) with **no convergence at 10,000 steps**. This is **not a stable attractor**. The regime is **chaotic or quasi‑periodic** – neither collapsing nor stabilizing over the tested run length.
+
+**Visual evidence:** `gray_scott_f014_k040.png` (final field), `stability_f014_k040.png` (coverage over 10,000 steps).
+
+## Structural Analogy – Thermodynamic Phase Diagrams
+
+| Thermodynamic system | Gray‑Scott system |
+|----------------------|-------------------|
+| Axes: pressure, temperature | Axes: k (kill rate), f (feed rate) |
+| Phases: solid, liquid, gas | Regimes: COLL, STBL, OSCI, UNIF |
+| Phase boundaries: sharp transitions | Regime boundaries: sharp onset at collapse thresholds |
+| Triple point | Irregular boundary region (multiple regimes adjacent) |
+| Critical point | High‑coverage anomaly at f=0.014, k=0.040 |
+
+The analogy is **structural**, not physical. Both systems exhibit sharp, non‑linear transitions between distinct global states when control parameters cross critical thresholds (bifurcation theory).
+
+## Boundary Resolution – f=0.014
+
+Higher‑resolution sweep across k at fixed f=0.014 (step 0.001, k=0.044 to 0.052).
+
+| k     | final_cov | notes |
+|-------|-----------|-------|
+| 0.044 | 0.000     | collapsed |
+| 0.045 | 0.000     | collapsed |
+| 0.046 | 0.000     | collapsed |
+| 0.047 | 0.000     | collapsed |
+| 0.0475| 0.000     | collapsed |
+| 0.0480| ~0.220    | **sharp onset** |
+| 0.0485| ~0.335    | peak coverage |
+| 0.049 | ~0.225    | declining |
+| 0.050 | ~0.218    | declining |
+| 0.051 | ~0.197    | declining |
+| 0.052 | ~0.142    | declining |
+
+**Lower boundary:** between k=0.0475 and 0.0480 – zero to ~22% coverage in a single 0.0005 step.
+
+**Peak at k=0.0485** (~34% coverage) – high‑coverage state immediately inside the boundary before declining as k increases.
+
+**No sharp upper collapse** in this range – coverage declines gradually from k=0.048 to 0.052.
+
+## Repository Files (Phase Map Only)
+
+- `gray_scott_2d_sweep.py` – sweep script
+- `phase_map_7x7.csv` – raw data, all 49 runs
+- `gray_scott_phase_map.png` – regime heatmap
+- `boundary_resolution_f014.png` – boundary resolution plot
+- `gray_scott_f014_k040.png` – inverted‑bubble final field
+- `stability_f014_k040.png` – 10k‑step stability coverage
+- `stability_results.json` – numerical stability data
+
+Parameter sweep across feed rate (f) and kill rate (k).  
+Fixed: N=64, Du=0.16, Dv=0.08, dt=1.0, steps=3000.
+
+## Regime Map (7×7 grid)
+
 # Gray-Scott Reaction-Diffusion Simulation
 
 A numerical simulation of the Gray-Scott model implemented in Python/NumPy.
